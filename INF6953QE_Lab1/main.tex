@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cite}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+
+
+% Set page geometry
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+% Logo at the top
+\begin{center}
+    \includegraphics[width=1.0\textwidth]{logo_polymtl.png}\\
+\end{center}
+
+% Title with horizontal lines
+\begin{center}
+    \rule{\linewidth}{0.5mm}\\[0.3cm]
+    {\LARGE \textbf{INF6953QE - Lab 1}}\\[0.3cm]
+    \rule{\linewidth}{0.5mm}\\[0.5cm]
+\end{center}
+
+\vspace{3cm} % Adds vertical space
+
+
+% Group name and authors
+\begin{center}
+    \Large 
+    Luiz Marioano - Matricule étudiant \\
+    Joao Sutter - Matricule étudiant \\
+    Federico Capitani - Matricule étudiant \\
+    Dan Vlad Himcinschi - 2553985 \\
+    Gabriel - Matricule étudiant \\
+\end{center}
+
+% Date at the bottom of the page
+\vfill
+\begin{flushright}
+    \textbf{\today}
+\end{flushright}
+
+\newpage
+
+\begingroup
+    \renewcommand{\contentsname}{Table of Contents}
+    \tableofcontents
+\endgroup
+
+\newpage
+
+\section{Understanding of Dataset and Network Diagram}
+
+\section{Applying ML Algorithms to IoT-23 Data}
+
+The coding for preprocessing and training was done in a Jupyter-Notebook which is handed in together with this report.
+
+\section{Comparison of Results}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+ \hline
+ Model & Accuracy &Precision & Recall & F1-Score \\
+ \hline
+ Decision Tree & 0.9957 & 0.9953 & 1.0 & 0.9976 \\
+ KNN & 0.9957 & 0.9956 & 0.9997 & 0.9976 \\
+ Logistic Regression & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
+ Linear SVM & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\section{Testing on a Different Scenario}
+
+
+\section{References}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
