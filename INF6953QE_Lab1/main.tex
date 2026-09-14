@@ -34,7 +34,7 @@
     Joao Sutter - Matricule étudiant \\
     Federico Capitani - Matricule étudiant \\
     Dan Vlad Himcinschi - 2553985 \\
-    Gabriel - Matricule étudiant \\
+    Gabriel Guglielmi Kirtschig - 2553838 \\
 \end{center}
 
 % Date at the bottom of the page
@@ -53,6 +53,24 @@
 \newpage
 
 \section{Understanding of Dataset and Network Diagram}
+
+This section examines the characteristics of the IoT-23 dataset, a collection of network traffic that groups benign IoT device operations with malicious botnet infections. To evaluate the dataset's composition, five specific malware scenarios were selected for analysis. The following table details the hardware environment, malware classifications and primary attack behaviors associated with each scenario. Additionally, a network topology diagram is presented to illustrate the controlled laboratory environment used during the research.
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{l l l X}
+    \toprule
+    \textbf{Scenario Name} & \textbf{IoT Device} & \textbf{Malware / Attack Type} & \textbf{Brief Description of Attack Behavior} \\
+    \midrule
+    \textbf{CTU-IoT-Malware-Capture-34-1} & Raspberry Pi & Mirai & The malware continuously scans the network for vulnerable IoT devices with open Telnet ports and default credentials. Once infected, it forms a botnet to launch distributed denial-of-service (DDoS) attacks. \\
+    \textbf{CTU-IoT-Malware-Capture-20-1} & Raspberry Pi & Torii & A sophisticated botnet that establishes persistence on the host device. It uses encrypted communications with command and control (C2) servers to execute arbitrary commands and exfiltrate data. \\
+    \textbf{CTU-IoT-Malware-Capture-36-1} & Raspberry Pi & Okiru & A botnet family that targets various IoT architectures. It brute-forces credentials to hijack devices and coordinate large-scale DDoS attacks. \\
+    \textbf{CTU-IoT-Malware-Capture-8-1} & Raspberry Pi & Hakai & A botnet that frequently targets IoT devices, such as routers, by brute-forcing Telnet and SSH connections to hijack their resources for participating in DDoS campaigns. \\
+    \textbf{CTU-IoT-Malware-Capture-7-1} & Raspberry Pi & Linux, Mirai & A Linux-specific execution of the Mirai botnet. It exhibits similar behavior to standard Mirai, aggressively scanning for vulnerable devices to infect and using them to flood target networks with traffic. \\
+    \bottomrule
+    \end{tabularx}
+    \end{table}
 
 \section{Applying ML Algorithms to IoT-23 Data}
 
