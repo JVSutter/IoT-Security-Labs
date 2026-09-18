@@ -36,7 +36,7 @@
     \Large 
     Luiz Marioano - Matricule étudiant \\
     João Sutter - 2553355 \\
-    Federico Capitani - Matricule étudiant \\
+    Federico Capitani - 2554694 \\
     Dan Vlad Himcinschi - 2553985 \\
     Gabriel Guglielmi Kirtschig - 2553838 \\
 \end{center}
@@ -92,10 +92,27 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
 \section{Applying ML Algorithms to IoT-23 Data}
 
 The accompanying Jupyter Notebook preprocesses the Mirai scenario and trains four classifiers to distinguish benign from malicious traffic.
+The given data set was prepared to be used for training. To achieve training quality, missing/invalid values were replaced by NaN if numerical, or 'Unknown' if categorical. The label 'benign' was encoded as 0 and the label 'attack' as 1. The following class distribution is present before training:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+ \hline
+ Class & Absolute count & Percentage  \\
+ \hline
+ 0 - Benign & 1923 & 8.31 \\
+ 1 - Attack & 212222 & 91.69 \\
+ \hline
+\end{tabular}
+\end{center}
+
+During preprocessing, the numerical values were scaled using the scikit StandardScaler while the categorical values were encoded using the OneHotEncoder.
+
+After training the different models, the result can be seen in the following confusion matrix, as well as in TASK 3.
+
 
 \section{Comparison of Results}
 
-The table below compares the test-set performance of the four models.
+The table below compares the performance of the test-set of the four models.
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
@@ -109,6 +126,11 @@ The table below compares the test-set performance of the four models.
  \hline
 \end{tabular}
 \end{center}
+
+The decision tree has a very good performance. However it is badly interpretable
+...
+currently working on it
+
 
 \section{Testing on a Different Scenario}
 
