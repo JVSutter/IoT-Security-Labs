@@ -91,7 +91,7 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
 
 \section{Applying ML Algorithms to IoT-23 Data}
 
-The accompanying Jupyter Notebook preprocesses the Mirai scenario and trains four classifiers to distinguish benign from malicious traffic.
+The accompanying Jupyter Notebook preprocesses the Mirai scenario and trains four classifiers to distinguish benign from malicious traffic. Data loading and numerical processing were implemented with pandas and NumPy \cite{pandas-2.3.3,harris2020array}.
 The given data set was prepared to be used for training. To achieve training quality, missing/invalid values were replaced by NaN if numerical, or 'Unknown' if categorical. The label 'benign' was encoded as 0 and the label 'attack' as 1. The following class distribution is present before training:
 
 \begin{center}
@@ -105,7 +105,7 @@ The given data set was prepared to be used for training. To achieve training qua
 \end{tabular}
 \end{center}
 
-During preprocessing, the numerical values were scaled using the scikit StandardScaler while the categorical values were encoded using the OneHotEncoder.
+During preprocessing, the numerical values were scaled using the scikit-learn StandardScaler while the categorical values were encoded using the OneHotEncoder \cite{scikit-learn}. Confusion matrices were plotted with Matplotlib \cite{Hunter2007}.
 
 After training the different models, the result can be seen in the following confusion matrix, as well as in TASK 3.
 
@@ -133,6 +133,20 @@ currently working on it
 
 
 \section{Testing on a Different Scenario}
+
+For this section, the Decision Tree model, which was trained on the
+CTU-IoT-Malware-Capture-34-1 (Mirai) scenario, was tested on the separate
+CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+ \hline
+ Model & Accuracy & Precision & Recall & F1-Score \\
+ \hline
+ Decision Tree & 0.9998 & 0.9998 & 1.0000 & 0.9999 \\
+ \hline
+\end{tabular}
+\end{center}
 
 
 \bibliographystyle{IEEEtran}
