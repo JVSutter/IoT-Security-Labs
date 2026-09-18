@@ -127,9 +127,17 @@ The table below compares the performance of the test-set of the four models.
 \end{tabular}
 \end{center}
 
-The decision tree has a very good performance. However it is badly interpretable
-...
-currently working on it
+The results show that the Decision Tree had the best overall performance on the training data of all trained models. However, all models show great results. 
+
+Precision indicates how many of the predicted packages are predicted correctly. Therefore  a precision score of 1.0 is achieved by only predicting one package as malicious, while being sure it indeed is malicious, for example because it was in the training data. Thus, a high precision can be easily reached.
+
+A high Recall-Score is a good indicator for a models performance, as it shows how many of the malicious packages were actually predicted. All of the four models have an excellent Recall score. Considering that recall shows how many of the malicious packages were predicted correctly, a model retrieves a good recall by predicting every package as malicious. Thus, a high recall score can be easily reached.
+
+The F1-score is a good metric as it is harder to achieve a good score then with the precision or accuracy. All of the trained models place themselves similarly to each other while having a very high score.
+
+High accuracy is very important, but accuracy alone does not indicate wether the model is good or not. Accuracy indicates how many packages are predicted correctly as malicious and how many are predicted correctly as not malicious. If the data is unbalanced it is easy to achieve a high accuracy by predicting only the high-represented class of packages. This will maximize the rate of true positive predictions, while having no true negative predictions. If there are much more packages that classify as positive then there are only few that are negative, so the impact of 0 true negative predictions on the accuracy score is small. Therefore accuracy alone is misleading when the data is not balanced, as in this case the internet traffic is.
+
+Decision Trees in general are not very interpretable, but they are very fast
 
 
 \section{Testing on a Different Scenario}
