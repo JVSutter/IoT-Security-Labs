@@ -30,5 +30,8 @@
 # Generated output
 *.pdf
 
+# Datasets
+**/data/raw/*
+
 # Exception: lab docs
 !**/docs/*
