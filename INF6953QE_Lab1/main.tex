@@ -89,7 +89,9 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
     \caption{Network topology monitoring setup for the IoT-23 dataset captures.}
     \label{fig:network_diagram}
 \end{figure}
-The Mirai-34-1 dataset contains 23,145 network flows. The original label column was separated into three fields, and the target was encoded as 0 for benign traffic and 1 for attack traffic. The class distribution before preprocessing is shown below.
+
+\section{Applying ML Algorithms to IoT-23 Data}
+The Mirai-34-1 dataset contains 23,145 network flows. The original label column was separated into three fields, and the target was encoded as 0 for benign traffic and 1 for attack traffic. Numerical arrays were handled using NumPy \cite{harris2020array}. The class distribution before preprocessing is shown below.
 
 \begin{table}[h]
   \centering
@@ -105,13 +107,13 @@ The Mirai-34-1 dataset contains 23,145 network flows. The original label column 
   \label{tab:class_distribution}
 \end{table}
 
-Before selecting the features, the notebook counted missing values and checked for duplicate rows and UIDs. No duplicates were found. The columns \texttt{local\_orig} and \texttt{local\_resp} were missing in every row and were removed. The partially missing columns \texttt{duration}, \texttt{orig\_bytes}, \texttt{resp\_bytes}, and \texttt{service} were retained because they still contain useful traffic information.
+Before selecting the features, the notebook used pandas \cite{pandas-2.3.3} to count missing values and check for duplicate rows and UIDs. No duplicates were found. The columns \texttt{local\_orig} and \texttt{local\_resp} were missing in every row and were removed. The partially missing columns \texttt{duration}, \texttt{orig\_bytes}, \texttt{resp\_bytes}, and \texttt{service} were retained because they still contain useful traffic information.
 
 Timestamp, UID, IP addresses, ports, label information, and uninformative local or tunnel fields were excluded. The final selection contains eight numerical traffic features and three categorical features: protocol, service, and connection state. Missing numerical values were replaced with the training-set median and then standardized. Missing categorical values were replaced with \texttt{Unknown} and one-hot encoded. These operations were included in the model pipelines to avoid data leakage \cite{scikit-learn}.
 
 The data was split using stratified sampling into 70\% training, 15\% validation, and 15\% test sets. The validation set was used to select the hyperparameters according to macro F1-score, which gives equal importance to both classes. The selected configurations were a Decision Tree with maximum depth 5, kNN with five neighbours and Manhattan distance, and Logistic Regression and Linear SVM with \(C=0.1\).
 
-Finally, the selected models were trained again using the combined training and validation sets and evaluated on the untouched test set. Accuracy, precision, recall, and F1-score are reported in Section~3, while Figure~\ref{fig:confusion_matrix} shows the confusion matrices obtained by the four models.
+Finally, the selected models were trained again using the combined training and validation sets and evaluated on the untouched test set. Accuracy, precision, recall, and F1-score are reported in Section~3, while Figure~\ref{fig:confusion_matrix} shows the confusion matrices obtained by the four models, plotted using Matplotlib \cite{Hunter2007}.
 
 \begin{figure}[H]
   \centering
