@@ -89,37 +89,37 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
     \caption{Network topology monitoring setup for the IoT-23 dataset captures.}
     \label{fig:network_diagram}
 \end{figure}
-
-\section{Applying ML Algorithms to IoT-23 Data}
-
-The accompanying Jupyter Notebook preprocesses the Mirai scenario and trains four classifiers to distinguish benign from malicious traffic. Data loading and numerical processing were implemented with pandas and NumPy \cite{pandas-2.3.3,harris2020array}.
-The given data set was prepared to be used for training. To achieve training quality, missing/invalid values were replaced by NaN if numerical, or 'Unknown' if categorical. The label 'benign' was encoded as 0 and the label 'attack' as 1. The following class distribution is present before training:
+The Mirai-34-1 dataset contains 23,145 network flows. The original label column was separated into three fields, and the target was encoded as 0 for benign traffic and 1 for attack traffic. The class distribution before preprocessing is shown below.
 
 \begin{table}[h]
-    \centering
-    \begin{tabular}{|c|c|c|}
-     \hline
-     Class & Absolute count & Percentage  \\
-     \hline
-     0 - Benign & 1923 & 8.31 \\
-     1 - Attack & 21222 & 91.69 \\
-     \hline
-    \end{tabular}
-    \caption{Class distribution of CTU-IoT-Malware-Capture-34-
-1 (Mirai) dataset}
-    \label{tab:class_distribution}
+  \centering
+  \begin{tabular}{|c|c|c|}
+      \hline
+      Class & Absolute count & Percentage \\
+      \hline
+      0 -- Benign & 1923 & 8.31\% \\
+      1 -- Attack & 21222 & 91.69\% \\
+      \hline
+  \end{tabular}
+  \caption{Class distribution of the Mirai-34-1 dataset.}
+  \label{tab:class_distribution}
 \end{table}
 
-During preprocessing, the numerical values were scaled using the scikit-learn StandardScaler while the categorical values were encoded using the OneHotEncoder \cite{scikit-learn}. Confusion matrices were plotted with Matplotlib \cite{Hunter2007}.
+Before selecting the features, the notebook counted missing values and checked for duplicate rows and UIDs. No duplicates were found. The columns \texttt{local\_orig} and \texttt{local\_resp} were missing in every row and were removed. The partially missing columns \texttt{duration}, \texttt{orig\_bytes}, \texttt{resp\_bytes}, and \texttt{service} were retained because they still contain useful traffic information.
 
-After training the different models, the result can be seen in the following confusion matrix, as well as in TASK 3.
+Timestamp, UID, IP addresses, ports, label information, and uninformative local or tunnel fields were excluded. The final selection contains eight numerical traffic features and three categorical features: protocol, service, and connection state. Missing numerical values were replaced with the training-set median and then standardized. Missing categorical values were replaced with \texttt{Unknown} and one-hot encoded. These operations were included in the model pipelines to avoid data leakage \cite{scikit-learn}.
+
+The data was split using stratified sampling into 70\% training, 15\% validation, and 15\% test sets. The validation set was used to select the hyperparameters according to macro F1-score, which gives equal importance to both classes. The selected configurations were a Decision Tree with maximum depth 5, KNN with five neighbours and Manhattan distance, and Logistic Regression and Linear SVM with \(C=0.1\).
+
+Finally, the selected models were trained again using the combined training and validation sets and evaluated on the untouched test set. Accuracy, precision, recall, and F1-score are reported in Section~3, while Figure~\ref{fig:confusion_matrix} shows the confusion matrices obtained by the four models.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{confusion_matrix.png}
-    \caption{Confusion matrix of the different models}
-    \label{fig:confusion_matrix}
+  \centering
+  \includegraphics[width=0.8\textwidth]{confusion_matrix.png}
+  \caption{Confusion matrices of the four models on the Mirai-34-1 test set.}
+  \label{fig:confusion_matrix}
 \end{figure}
+
 
 \section{Comparison of Results}
 
