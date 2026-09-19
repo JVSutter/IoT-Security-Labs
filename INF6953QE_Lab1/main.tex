@@ -84,7 +84,7 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{network_diagram.png}
+    \includegraphics[width=0.6\textwidth]{network_diagram.png}
     \caption{Network topology monitoring setup for the IoT-23 dataset captures.}
     \label{fig:network_diagram}
 \end{figure}
@@ -112,32 +112,37 @@ After training the different models, the result can be seen in the following con
 
 \section{Comparison of Results}
 
-The table below compares the performance of the test-set of the four models.
+The table below compares the performance of the Decision Tree, KNN, Logistic Regression and Linear SVM on the test-set, obtained by splitting the CTU-IoT-Malware-Capture-34-1 (Mirai) dataset.
 
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|}
- \hline
- Model & Accuracy &Precision & Recall & F1-Score \\
- \hline
- Decision Tree & 0.9957 & 0.9953 & 1.0 & 0.9976 \\
- KNN & 0.9957 & 0.9956 & 0.9997 & 0.9976 \\
- Logistic Regression & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
- Linear SVM & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
- \hline
-\end{tabular}
-\end{center}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+     \hline
+     Model & Accuracy &Precision & Recall & F1-Score \\
+     \hline
+     Decision Tree & 0.9957 & 0.9953 & 1.0 & 0.9976 \\
+     KNN & 0.9957 & 0.9956 & 0.9997 & 0.9976 \\
+     Logistic Regression & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
+     Linear SVM & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
+     \hline
+    \end{tabular}
+    \caption{Results of model training on CTU-IoT-Malware-Capture-34-
+1 (Mirai)}
+    \label{tab:placeholder}
+\end{table}
 
 The results show that the Decision Tree had the best overall performance on the training data of all trained models. However, all models show great results. 
 
-Precision indicates how many of the predicted packages are predicted correctly. Therefore  a precision score of 1.0 is achieved by only predicting one package as malicious, while being sure it indeed is malicious, for example because it was in the training data. Thus, a high precision can be easily reached.
+Precision indicates how many of the predicted packages are predicted correctly. Therefore  a precision score of 1.0 is achieved by only predicting one package as malicious, while being sure it indeed is malicious, for example because it was in the training data. Achieving a high precision score is easy, and all four models perform well. However, Decision Trees and kNN have slightly better results than the other models.
 
 A high Recall-Score is a good indicator for a models performance, as it shows how many of the malicious packages were actually predicted. All of the four models have an excellent Recall score. Considering that recall shows how many of the malicious packages were predicted correctly, a model retrieves a good recall by predicting every package as malicious. Thus, a high recall score can be easily reached.
 
-The F1-score is a good metric as it is harder to achieve a good score then with the precision or accuracy. All of the trained models place themselves similarly to each other while having a very high score.
+The F1-score is a good metric as it is harder to achieve a good score than with the precision or accuracy. All of the trained models place themselves similarly to each other while having a very high score.
 
-High accuracy is very important, but accuracy alone does not indicate wether the model is good or not. Accuracy indicates how many packages are predicted correctly as malicious and how many are predicted correctly as not malicious. If the data is unbalanced it is easy to achieve a high accuracy by predicting only the high-represented class of packages. This will maximize the rate of true positive predictions, while having no true negative predictions. If there are much more packages that classify as positive then there are only few that are negative, so the impact of 0 true negative predictions on the accuracy score is small. Therefore accuracy alone is misleading when the data is not balanced, as in this case the internet traffic is.
+High accuracy is very important, but accuracy alone does not indicate whether the model is good or not. Accuracy indicates how many packages are predicted correctly as malicious and how many are predicted correctly as not malicious. If the data is unbalanced it is easy to achieve a high accuracy by predicting only the high-represented class of packages. This will maximize the rate of true positive predictions, while having no true negative predictions. If there are much more packages that classify as positive than there are only few that are negative, so the impact of 0 true negative predictions on the accuracy score is small. Therefore accuracy alone is misleading when the data is not balanced, as in this case the internet traffic is. \cite{isnotes}
 
-Decision Trees in general are not very interpretable, but they are very fast
+Logistic Regression and Linear SVM are both relatively straightforward to interpret. Decision Trees are human-readable and interpretable as long as their depth is not too deep. and kNN can be more difficult to interpret. Although the training of kNN is very fast, actual use for predictions can be slower because all training data is needed to determine the nearest neighbors. The other three models are faster \cite{mathworks}. All of the models have very good results on the unseen test data. As the Decision tree has slightly better results then the others, and it is fast and interpretable, it will be used for the fourth task.
+
 
 
 \section{Testing on a Different Scenario}
@@ -146,15 +151,19 @@ For this section, the Decision Tree model, which was trained on the
 CTU-IoT-Malware-Capture-34-1 (Mirai) scenario, was tested on the separate
 CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
 
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|}
- \hline
- Model & Accuracy & Precision & Recall & F1-Score \\
- \hline
- Decision Tree & 0.9998 & 0.9998 & 1.0000 & 0.9999 \\
- \hline
-\end{tabular}
-\end{center}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+     \hline
+     Model & Accuracy & Precision & Recall & F1-Score \\
+     \hline
+     Decision Tree & 0.9998 & 0.9998 & 1.0000 & 0.9999 \\
+     \hline
+    \end{tabular}
+    \caption{Results of Decision Tree model on CTU-IoT-Malware-Capture-8-1 (Hakai)}
+    \label{tab:placeholder}
+\end{table}
+
 
 
 \bibliographystyle{IEEEtran}
