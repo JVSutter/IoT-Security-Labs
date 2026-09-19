@@ -33,7 +33,7 @@
 
 % Group name and authors
 \begin{center}
-    \Large 
+    \Large
     Luiz Mariano - Matricule étudiant \\
     João Sutter - 2553355 \\
     Federico Capitani - 2554694 \\
@@ -58,7 +58,7 @@
 
 \section{Understanding of the Dataset and Network Diagram}
 
-This section examines the characteristics of the IoT-23 dataset, a collection of network traffic that groups benign IoT device operations with malicious botnet infections. To evaluate the dataset's composition, five specific malware scenarios were selected for analysis. The following table details the hardware environment, malware classifications and primary attack behaviors associated with each scenario. Additionally, a network topology diagram is presented to illustrate the controlled laboratory environment used during the research.
+This section examines the characteristics of the IoT-23 dataset \cite{iot23}, a collection of network traffic that groups benign IoT device operations with malicious botnet infections. To evaluate the dataset's composition, five specific malware scenarios were selected for analysis. The following table details the hardware environment, malware classifications and primary attack behaviors associated with each scenario. Additionally, a network topology diagram is presented to illustrate the controlled laboratory environment used during the research.
 
 \begingroup
     \small
@@ -161,7 +161,7 @@ Logistic Regression and Linear SVM are both relatively straightforward to interp
 
 For this section, the Decision Tree model, which was trained on the
 CTU-IoT-Malware-Capture-34-1 (Mirai) scenario, was tested on the separate
-CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
+CTU-IoT-Malware-Capture-8-1 (Hakai) scenario \cite{iot23scenarioguide}. The results are presented below.
 
 \begin{table}[h]
     \centering
@@ -176,7 +176,9 @@ CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
     \label{tab:Results_unknown}
 \end{table}
 
+The Decision Tree, trained on the Mirai-34-1 scenario, achieved an F1-score of 0.9999 on the Hakai-8-1 scenario, slightly above the 0.9976 obtained on the Mirai test set. This suggests that the traffic patterns learned from Mirai transferred well to Hakai, likely because both malware families rely on similar low-level network behaviors (aggressive scanning with short, mostly unanswered TCP connections) that are captured by features such as connection state and packet counts. The near-perfect recall confirms that the model detected virtually all attack flows in the new scenario.
 
+That said, these results should be interpreted with care. Both scenarios share the same device type (Raspberry Pi) and were captured in controlled laboratory environments with heavily imbalanced traffic, which may have made the generalization task easier than it would be in practice. Real-world IoT networks involve a much wider variety of devices, traffic profiles, and attack patterns, and performance could degrade considerably under those conditions. Training on data from multiple scenarios would likely be necessary to build a more robust detection system.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
