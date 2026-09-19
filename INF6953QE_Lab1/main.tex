@@ -56,7 +56,7 @@
 
 \newpage
 
-\section{Understanding of Dataset and Network Diagram}
+\section{Understanding of the Dataset and Network Diagram}
 
 This section examines the characteristics of the IoT-23 dataset, a collection of network traffic that groups benign IoT device operations with malicious botnet infections. To evaluate the dataset's composition, five specific malware scenarios were selected for analysis. The following table details the hardware environment, malware classifications and primary attack behaviors associated with each scenario. Additionally, a network topology diagram is presented to illustrate the controlled laboratory environment used during the research.
 
@@ -109,7 +109,7 @@ Before selecting the features, the notebook counted missing values and checked f
 
 Timestamp, UID, IP addresses, ports, label information, and uninformative local or tunnel fields were excluded. The final selection contains eight numerical traffic features and three categorical features: protocol, service, and connection state. Missing numerical values were replaced with the training-set median and then standardized. Missing categorical values were replaced with \texttt{Unknown} and one-hot encoded. These operations were included in the model pipelines to avoid data leakage \cite{scikit-learn}.
 
-The data was split using stratified sampling into 70\% training, 15\% validation, and 15\% test sets. The validation set was used to select the hyperparameters according to macro F1-score, which gives equal importance to both classes. The selected configurations were a Decision Tree with maximum depth 5, KNN with five neighbours and Manhattan distance, and Logistic Regression and Linear SVM with \(C=0.1\).
+The data was split using stratified sampling into 70\% training, 15\% validation, and 15\% test sets. The validation set was used to select the hyperparameters according to macro F1-score, which gives equal importance to both classes. The selected configurations were a Decision Tree with maximum depth 5, kNN with five neighbours and Manhattan distance, and Logistic Regression and Linear SVM with \(C=0.1\).
 
 Finally, the selected models were trained again using the combined training and validation sets and evaluated on the untouched test set. Accuracy, precision, recall, and F1-score are reported in Section~3, while Figure~\ref{fig:confusion_matrix} shows the confusion matrices obtained by the four models.
 
@@ -123,36 +123,35 @@ Finally, the selected models were trained again using the combined training and 
 
 \section{Comparison of Results}
 
-The table below compares the performance of the Decision Tree, KNN, Logistic Regression and Linear SVM on the test-set, obtained by splitting the CTU-IoT-Malware-Capture-34-1 (Mirai) dataset.
+The table below compares the performance of the Decision Tree, kNN, Logistic Regression and Linear SVM on the test set, obtained by splitting the CTU-IoT-Malware-Capture-34-1 (Mirai) dataset.
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
      \hline
-     Model & Accuracy &Precision & Recall & F1-Score \\
+     Model & Accuracy & Precision & Recall & F1-Score \\
      \hline
      Decision Tree & 0.9957 & 0.9953 & 1.0 & 0.9976 \\
-     KNN & 0.9957 & 0.9956 & 0.9997 & 0.9976 \\
+     kNN & 0.9957 & 0.9956 & 0.9997 & 0.9976 \\
      Logistic Regression & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
      Linear SVM & 0.9954 & 0.9950 & 1.0 & 0.9975 \\
      \hline
     \end{tabular}
-    \caption{Results of model training on CTU-IoT-Malware-Capture-34-
-1 (Mirai)}
+    \caption{Results of model training on the CTU-IoT-Malware-Capture-34-1 (Mirai) dataset}
     \label{tab:Results_metrics}
 \end{table}
 
-The results show that the Decision Tree had the best overall performance on the training data of all trained models. However, all models show great results. 
+The results show that the Decision Tree had the best overall performance on the training data of all trained models. However, all models show great results.
 
-Precision indicates how many of the predicted packages are predicted correctly. Therefore  a precision score of 1.0 is achieved by only predicting one package as malicious, while being sure it indeed is malicious, for example because it was in the training data. Achieving a high precision score is easy, and all four models perform well. However, Decision Trees and kNN have slightly better results than the other models.
+Precision indicates how many of the predicted packets are predicted correctly. Therefore, a precision score of 1.0 is achieved by only predicting one packet as malicious, while being sure it is indeed malicious, for example because it was in the training data. Achieving a high precision score is easy, and all four models perform well. However, Decision Trees and kNN have slightly better results than the other models.
 
-A high Recall-Score is a good indicator for a models performance, as it shows how many of the malicious packages were actually predicted. All of the four models have an excellent Recall score. Considering that recall shows how many of the malicious packages were predicted correctly, a model retrieves a good recall by predicting every package as malicious. Thus, a high recall score can be easily reached.
+A high recall score is a good indicator of a model's performance, as it shows how many of the malicious packets were actually predicted. All four models have an excellent recall score. Considering that recall shows how many of the malicious packets were predicted correctly, a model achieves high recall by predicting every packet as malicious. Thus, a high recall score can be easily reached.
 
-The F1-score is a good metric as it is harder to achieve a good score than with the precision or accuracy. All of the trained models place themselves similarly to each other while having a very high score.
+The F1-score is a good metric as it is harder to achieve a good score than with precision or accuracy. All of the trained models place themselves similarly to each other while having a very high score.
 
-High accuracy is very important, but accuracy alone does not indicate whether the model is good or not. Accuracy indicates how many packages are predicted correctly as malicious and how many are predicted correctly as not malicious. If the data is unbalanced it is easy to achieve a high accuracy by predicting only the high-represented class of packages. This will maximize the rate of true positive predictions, while having no true negative predictions. If there are much more packages that classify as positive than there are only few that are negative, so the impact of 0 true negative predictions on the accuracy score is small. Therefore accuracy alone is misleading when the data is not balanced, as in this case the internet traffic is. \cite{isnotes}
+High accuracy is very important, but accuracy alone does not indicate whether the model is good or not. Accuracy indicates how many packets are predicted correctly as malicious and how many are predicted correctly as not malicious. If the data is unbalanced, it is easy to achieve high accuracy by predicting only the highly represented class of packets. This will maximize the rate of true positive predictions, while having no true negative predictions. If there are many more packets that classify as positive than as negative, the impact of 0 true negative predictions on the accuracy score is small. Therefore, accuracy alone is misleading when the data is not balanced, as in this case the internet traffic is \cite{isnotes}.
 
-Logistic Regression and Linear SVM are both relatively straightforward to interpret. Decision Trees are human-readable and interpretable as long as their depth is not too deep. and kNN can be more difficult to interpret. Although the training of kNN is very fast, actual use for predictions can be slower because all training data is needed to determine the nearest neighbors. The other three models are faster \cite{mathworks}. All of the models have very good results on the unseen test data. As the Decision tree has slightly better results then the others, and it is fast and interpretable, it will be used for the fourth task.
+Logistic Regression and Linear SVM are both relatively straightforward to interpret. Decision Trees are human-readable and interpretable as long as their depth is not too deep, and kNN can be more difficult to interpret. Although the training of kNN is very fast, actual use for predictions can be slower because all training data is needed to determine the nearest neighbors. The other three models are faster \cite{mathworks}. All of the models have very good results on the unseen test data. As the Decision Tree has slightly better results than the others and is fast and interpretable, it will be used for the fourth task.
 
 
 
@@ -171,7 +170,7 @@ CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
      Decision Tree & 0.9998 & 0.9998 & 1.0000 & 0.9999 \\
      \hline
     \end{tabular}
-    \caption{Results of Decision Tree model on CTU-IoT-Malware-Capture-8-1 (Hakai)}
+    \caption{Results of the Decision Tree model on CTU-IoT-Malware-Capture-8-1 (Hakai)}
     \label{tab:Results_unknown}
 \end{table}
 
