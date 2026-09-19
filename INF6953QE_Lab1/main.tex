@@ -79,6 +79,7 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
     \textbf{CTU-IoT-Malware-Capture-8-1} & Raspberry Pi & Hakai & A botnet that frequently targets IoT devices, such as routers, by brute-forcing Telnet and SSH connections to hijack their resources for participating in DDoS campaigns. \\
     \textbf{CTU-IoT-Malware-Capture-7-1} & Raspberry Pi & Linux, Mirai & A Linux-specific execution of the Mirai botnet. It exhibits similar behavior to standard Mirai, aggressively scanning for vulnerable devices to infect and using them to flood target networks with traffic. \\
     \bottomrule
+    \caption{Brief analysis of different scenarios.}
     \end{longtable}
 \endgroup
 
@@ -94,21 +95,31 @@ This section examines the characteristics of the IoT-23 dataset, a collection of
 The accompanying Jupyter Notebook preprocesses the Mirai scenario and trains four classifiers to distinguish benign from malicious traffic. Data loading and numerical processing were implemented with pandas and NumPy \cite{pandas-2.3.3,harris2020array}.
 The given data set was prepared to be used for training. To achieve training quality, missing/invalid values were replaced by NaN if numerical, or 'Unknown' if categorical. The label 'benign' was encoded as 0 and the label 'attack' as 1. The following class distribution is present before training:
 
-\begin{center}
-\begin{tabular}{|c|c|c|}
- \hline
- Class & Absolute count & Percentage  \\
- \hline
- 0 - Benign & 1923 & 8.31 \\
- 1 - Attack & 21222 & 91.69 \\
- \hline
-\end{tabular}
-\end{center}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+     \hline
+     Class & Absolute count & Percentage  \\
+     \hline
+     0 - Benign & 1923 & 8.31 \\
+     1 - Attack & 21222 & 91.69 \\
+     \hline
+    \end{tabular}
+    \caption{Class distribution of CTU-IoT-Malware-Capture-34-
+1 (Mirai) dataset}
+    \label{tab:class_distribution}
+\end{table}
 
 During preprocessing, the numerical values were scaled using the scikit-learn StandardScaler while the categorical values were encoded using the OneHotEncoder \cite{scikit-learn}. Confusion matrices were plotted with Matplotlib \cite{Hunter2007}.
 
 After training the different models, the result can be seen in the following confusion matrix, as well as in TASK 3.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{confusion_matrix.png}
+    \caption{Confusion matrix of the different models}
+    \label{fig:confusion_matrix}
+\end{figure}
 
 \section{Comparison of Results}
 
@@ -128,7 +139,7 @@ The table below compares the performance of the Decision Tree, KNN, Logistic Reg
     \end{tabular}
     \caption{Results of model training on CTU-IoT-Malware-Capture-34-
 1 (Mirai)}
-    \label{tab:placeholder}
+    \label{tab:Results_metrics}
 \end{table}
 
 The results show that the Decision Tree had the best overall performance on the training data of all trained models. However, all models show great results. 
@@ -161,7 +172,7 @@ CTU-IoT-Malware-Capture-8-1 (Hakai) scenario. The results are presented below.
      \hline
     \end{tabular}
     \caption{Results of Decision Tree model on CTU-IoT-Malware-Capture-8-1 (Hakai)}
-    \label{tab:placeholder}
+    \label{tab:Results_unknown}
 \end{table}
 
 
